@@ -1,5 +1,8 @@
 ﻿
 #SingleInstance Force
+
+FileCopy, %A_Startup%\*.ahk, %A_MyDocuments%\GitHub\AutoHotKey\
+
 #F12::
 Run "E:\bablu\Selenium Project requirements.ahk"
 Return
@@ -81,18 +84,24 @@ gsws:="ahk_class Chrome_WidgetWin_1 ahk_exe msedge.exe"
 	  Else
 	{
 		WinActivate
-		Sleep, 100
+		Sleep, 50
 		WinGet, ID, ID, A
 		WinGetTitle, TabTitle, ahk_id %ID%
+		FirstTitle:=TabTitle
 		regvalue:=0
+		tabs:=0
 		while(regvalue==0 and RegExMatch(TabTitle, "Grama - Ward Sachivalayam.*")<>1){
-			Sleep, 100
+			Sleep, 50
 			Send, ^{Tab}
-			Sleep, 100
+			Sleep, 50
 			WinGet, ID, ID, A
 			WinGetTitle, TabTitle, ahk_id %ID%
 			regvalue:= RegExMatch(TabTitle, "Grama - Ward Sachivalayam.*")
-			;~ MsgBox %TabTitle% `n %title%
+			if(FirstTitle==TabTitle){
+				run, msedge.exe  "https://vswsonline.ap.gov.in/"
+				break
+
+			}
 		}
 	}
 
