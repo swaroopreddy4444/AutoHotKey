@@ -89,7 +89,6 @@ gsws:="ahk_class Chrome_WidgetWin_1 ahk_exe msedge.exe"
 		WinGetTitle, TabTitle, ahk_id %ID%
 		FirstTitle:=TabTitle
 		regvalue:=0
-		tabs:=0
 		while(regvalue==0 and RegExMatch(TabTitle, "Grama - Ward Sachivalayam.*")<>1){
 			Sleep, 50
 			Send, ^{Tab}
